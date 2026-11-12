@@ -1,0 +1,594 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#101225">
+
+    <title>Smart Scientific & AI Calculator</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app-container">
+
+        <header class="top-bar">
+            <div class="brand">
+                <h1>Smart Calculator</h1>
+                <p>Scientific & AI Calculator</p>
+            </div>
+
+            <div class="header-actions">
+                <select id="languageSelect">
+                    <option value="en">English</option>
+                    <option value="bn">বাংলা</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="ar">العربية</option>
+                </select>
+
+                <button id="themeBtn" type="button">☾</button>
+           
+            <button id="tempOpenBtn" type="button">CONVERTER</button>
+            
+            
+            </div>
+        </header>
+
+        <main>
+
+          
+
+<section class="history-section" id="historySection" hidden>
+
+    <div class="history-header">
+        <h2>Calculation History</h2>
+
+        <button id="backToCalculator" type="button">
+            ← Back
+        </button>
+    </div>
+
+    <div class="history-actions">
+        <button id="clearHistory" type="button">
+            Clear All
+        </button>
+    </div>
+
+    <div id="historyList">
+        <p id="emptyHistory">No history yet</p>
+    </div>
+
+</section>
+          
+            <section class="display-box">
+                <div class="display-label">
+                    CALCULATION
+                </div>
+
+                <div id="expression"></div>
+
+                <input
+                    type="text"
+                    id="display"
+                    value="0"
+                    readonly
+                    aria-label="Calculator display"
+                >
+            </section>
+
+            <section class="calculator-buttons">
+
+
+<button
+    class="scientific-toggle"
+    id="scientificToggle"
+    type="button"
+>
+    SCIENTIFIC MODE
+</button>
+
+<div class="scientific-panel" id="scientificPanel" hidden>
+
+    <button data-value="(">(</button>
+    <button data-value=")">)</button>
+    <button data-value="π">π</button>
+    <button data-value="e">e</button>
+
+    <button data-value="sin(">sin</button>
+    <button data-value="cos(">cos</button>
+    <button data-value="tan(">tan</button>
+    <button data-value="log(">log</button>
+
+    <button data-value="ln(">ln</button>
+    <button data-value="√(">√</button>
+    <button data-value="^2">x²</button>
+    <button data-value="^">xʸ</button>
+
+    <button data-value="!">!</button>
+    <button id="angleMode" type="button">DEG</button>
+
+</div>
+
+              
+                <button class="special" data-action="clear">AC</button>
+                <button class="special" data-action="delete">DEL</button>
+                <button class="special" data-value="%">%</button>
+                <button class="operator" data-value="/">÷</button>
+
+                <button data-value="7">7</button>
+                <button data-value="8">8</button>
+                <button data-value="9">9</button>
+                <button class="operator" data-value="*">×</button>
+
+                <button data-value="4">4</button>
+                <button data-value="5">5</button>
+                <button data-value="6">6</button>
+                <button class="operator" data-value="-">−</button>
+
+                <button data-value="1">1</button>
+                <button data-value="2">2</button>
+                <button data-value="3">3</button>
+                <button class="operator" data-value="+">+</button>
+
+                <button class="special" data-action="history">HIS</button>
+                <button data-value="0">0</button>
+                <button data-value=".">.</button>
+                <button class="equal" data-action="calculate">=</button>
+
+            </section>
+
+        </main>
+
+
+<!-- TEMPERATURE CONVERTER -->
+
+<section class="converter-section" id="temperatureConverter" hidden>
+
+<button id="tempBackBtn" type="button">← Back</button>
+
+
+<div class="converter-dashboard" id="converterDashboard">
+
+    <h2>All-in-One Converter</h2>
+    <p>Select a conversion category</p>
+
+    <div class="converter-menu">
+
+        <button data-converter="temperature">🌡️ Temperature</button>
+
+        <button data-converter="length">📏 Length</button>
+
+        <button data-converter="weight">⚖️ Weight</button>
+
+        <button data-converter="area">📐 Area</button>
+
+        <button data-converter="volume">🧪 Volume</button>
+
+        <button data-converter="speed">🚀 Speed</button>
+
+        <button data-converter="time">⏱️ Time</button>
+
+        <button data-converter="data">💾 Data Storage</button>
+
+        <button data-converter="number">🔢 Number System</button>
+
+    </div>
+
+</div>
+
+<button id="converterBackBtn" type="button" hidden>
+    ← All Converters
+</button>
+
+  <div id="converterScreens" hidden>
+    
+    
+    <section class="converter-section" id="temperatureScreen">
+
+    <h2>🌡️ Temperature Converter</h2>
+    <p>Convert temperature instantly</p>
+
+    <div class="converter-card">
+
+        <label for="tempInput">Enter Temperature</label>
+        <input type="number" id="tempInput" placeholder="Enter value">
+
+        <label for="tempFrom">From</label>
+        <select id="tempFrom">
+            <option value="C">Celsius (°C)</option>
+            <option value="F">Fahrenheit (°F)</option>
+            <option value="K">Kelvin (K)</option>
+        </select>
+
+        <button id="tempSwap" type="button">⇅ Swap</button>
+
+        <label for="tempTo">To</label>
+        <select id="tempTo">
+            <option value="F">Fahrenheit (°F)</option>
+            <option value="C">Celsius (°C)</option>
+            <option value="K">Kelvin (K)</option>
+        </select>
+
+        <div class="converter-result">
+            <p>Converted Result</p>
+            <h2 id="tempResult">32 °F</h2>
+        </div>
+
+        <button id="tempClear" type="button">Clear</button>
+
+    </div>
+
+</section>
+  <!-- LENGTH CONVERTER -->
+<section class="converter-section" id="lengthScreen" hidden>
+
+    <h2>📏 Length Converter</h2>
+    <p>Convert length units instantly</p>
+
+    <div class="converter-card">
+
+        <label for="lengthInput">Enter Length</label>
+        <input type="number" id="lengthInput" placeholder="Enter value">
+
+        <label for="lengthFrom">From</label>
+        <select id="lengthFrom">
+            <option value="m">Meter (m)</option>
+            <option value="km">Kilometer (km)</option>
+            <option value="cm">Centimeter (cm)</option>
+            <option value="mm">Millimeter (mm)</option>
+            <option value="mi">Mile (mi)</option>
+            <option value="ft">Foot (ft)</option>
+            <option value="in">Inch (in)</option>
+            <option value="yd">Yard (yd)</option>
+        </select>
+
+        <button id="lengthSwap" type="button">⇅ Swap</button>
+
+        <label for="lengthTo">To</label>
+        <select id="lengthTo">
+            <option value="km">Kilometer (km)</option>
+            <option value="m">Meter (m)</option>
+            <option value="cm">Centimeter (cm)</option>
+            <option value="mm">Millimeter (mm)</option>
+            <option value="mi">Mile (mi)</option>
+            <option value="ft">Foot (ft)</option>
+            <option value="in">Inch (in)</option>
+            <option value="yd">Yard (yd)</option>
+        </select>
+
+        <div class="converter-result">
+            <p>Converted Result</p>
+            <h2 id="lengthResult">Enter a value</h2>
+        </div>
+
+        <button id="lengthClear" type="button">Clear</button>
+
+    </div>
+</section>
+
+    <!-- WEIGHT CONVERTER -->
+<section class="converter-section" id="weightScreen" hidden>
+
+    <h2>⚖️ Weight Converter</h2>
+    <p>Convert weight units instantly</p>
+
+    <div class="converter-card">
+
+        <label for="weightInput">Enter Weight</label>
+        <input type="number" id="weightInput" placeholder="Enter value">
+
+        <label for="weightFrom">From</label>
+        <select id="weightFrom">
+            <option value="kg">Kilogram (kg)</option>
+            <option value="g">Gram (g)</option>
+            <option value="mg">Milligram (mg)</option>
+            <option value="lb">Pound (lb)</option>
+            <option value="oz">Ounce (oz)</option>
+            <option value="ton">Metric Ton (t)</option>
+        </select>
+
+        <button id="weightSwap" type="button">⇅ Swap</button>
+
+        <label for="weightTo">To</label>
+        <select id="weightTo">
+            <option value="g">Gram (g)</option>
+            <option value="kg">Kilogram (kg)</option>
+            <option value="mg">Milligram (mg)</option>
+            <option value="lb">Pound (lb)</option>
+            <option value="oz">Ounce (oz)</option>
+            <option value="ton">Metric Ton (t)</option>
+        </select>
+
+        <div class="converter-result">
+            <p>Converted Result</p>
+            <h2 id="weightResult">Enter a value</h2>
+        </div>
+
+        <button id="weightClear" type="button">Clear</button>
+
+    </div>
+
+</section>
+
+<!-- AREA CONVERTER -->
+<section class="converter-section" id="areaScreen" hidden>
+
+    <h2>📐 Area Converter</h2>
+    <p>Convert area units instantly</p>
+
+    <div class="converter-card">
+
+        <label for="areaInput">Enter Area</label>
+        <input type="number" id="areaInput" placeholder="Enter value">
+
+        <label for="areaFrom">From</label>
+        <select id="areaFrom">
+            <option value="m2">Square Meter (m²)</option>
+            <option value="km2">Square Kilometer (km²)</option>
+            <option value="cm2">Square Centimeter (cm²)</option>
+            <option value="ft2">Square Foot (ft²)</option>
+            <option value="in2">Square Inch (in²)</option>
+            <option value="acre">Acre</option>
+            <option value="hectare">Hectare</option>
+        </select>
+
+        <button id="areaSwap" type="button">⇅ Swap</button>
+
+        <label for="areaTo">To</label>
+        <select id="areaTo">
+            <option value="ft2">Square Foot (ft²)</option>
+            <option value="m2">Square Meter (m²)</option>
+            <option value="km2">Square Kilometer (km²)</option>
+            <option value="cm2">Square Centimeter (cm²)</option>
+            <option value="in2">Square Inch (in²)</option>
+            <option value="acre">Acre</option>
+            <option value="hectare">Hectare</option>
+        </select>
+
+        <div class="converter-result">
+            <p>Converted Result</p>
+            <h2 id="areaResult">Enter a value</h2>
+        </div>
+
+        <button id="areaClear" type="button">Clear</button>
+
+    </div>
+
+</section>
+
+<!-- VOLUME CONVERTER -->
+
+<section class="converter-section" id="volumeScreen" hidden>
+
+    <h2>🧪 Volume Converter</h2>
+    <p>Convert volume units instantly</p>
+
+    <div class="converter-card">
+
+        <label for="volumeInput">Enter Volume</label>
+        <input type="number" id="volumeInput" placeholder="Enter value">
+
+        <label for="volumeFrom">From</label>
+        <select id="volumeFrom">
+            <option value="L">Liter (L)</option>
+            <option value="mL">Milliliter (mL)</option>
+            <option value="m3">Cubic Meter (m³)</option>
+            <option value="cm3">Cubic Centimeter (cm³)</option>
+            <option value="ft3">Cubic Foot (ft³)</option>
+            <option value="gal">US Gallon (gal)</option>
+        </select>
+
+        <button id="volumeSwap" type="button">⇅ Swap</button>
+
+        <label for="volumeTo">To</label>
+        <select id="volumeTo">
+            <option value="mL">Milliliter (mL)</option>
+            <option value="L">Liter (L)</option>
+            <option value="m3">Cubic Meter (m³)</option>
+            <option value="cm3">Cubic Centimeter (cm³)</option>
+            <option value="ft3">Cubic Foot (ft³)</option>
+            <option value="gal">US Gallon (gal)</option>
+        </select>
+
+        <div class="converter-result">
+            <p>Converted Result</p>
+            <h2 id="volumeResult">Enter a value</h2>
+        </div>
+
+        <button id="volumeClear" type="button">Clear</button>
+
+    </div>
+
+</section>
+
+<!-- SPEED CONVERTER -->
+<section class="converter-section" id="speedScreen" hidden>
+
+    <h2>🚀 Speed Converter</h2>
+    <p>Convert speed units instantly</p>
+
+    <div class="converter-card">
+
+        <label for="speedInput">Enter Speed</label>
+        <input type="number" id="speedInput" placeholder="Enter value">
+
+        <label for="speedFrom">From</label>
+        <select id="speedFrom">
+            <option value="ms">Meter/Second (m/s)</option>
+            <option value="kmh">Kilometer/Hour (km/h)</option>
+            <option value="mph">Mile/Hour (mph)</option>
+            <option value="fts">Foot/Second (ft/s)</option>
+            <option value="knot">Knot</option>
+        </select>
+
+        <button id="speedSwap" type="button">⇅ Swap</button>
+
+        <label for="speedTo">To</label>
+        <select id="speedTo">
+            <option value="kmh">Kilometer/Hour (km/h)</option>
+            <option value="ms">Meter/Second (m/s)</option>
+            <option value="mph">Mile/Hour (mph)</option>
+            <option value="fts">Foot/Second (ft/s)</option>
+            <option value="knot">Knot</option>
+        </select>
+
+        <div class="converter-result">
+            <p>Converted Result</p>
+            <h2 id="speedResult">Enter a value</h2>
+        </div>
+
+        <button id="speedClear" type="button">Clear</button>
+
+    </div>
+</section>
+
+
+<!-- TIME CONVERTER -->
+<section class="converter-section" id="timeScreen" hidden>
+
+    <h2>⏱️ Time Converter</h2>
+    <p>Convert time units instantly</p>
+
+    <div class="converter-card">
+
+        <label for="timeInput">Enter Time</label>
+        <input type="number" id="timeInput" placeholder="Enter value">
+
+        <label for="timeFrom">From</label>
+        <select id="timeFrom">
+            <option value="s">Second</option>
+            <option value="ms">Millisecond</option>
+            <option value="min">Minute</option>
+            <option value="h">Hour</option>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+        </select>
+
+        <button id="timeSwap" type="button">⇅ Swap</button>
+
+        <label for="timeTo">To</label>
+        <select id="timeTo">
+            <option value="min">Minute</option>
+            <option value="s">Second</option>
+            <option value="ms">Millisecond</option>
+            <option value="h">Hour</option>
+            <option value="day">Day</option>
+            <option value="week">Week</option>
+        </select>
+
+        <div class="converter-result">
+            <p>Converted Result</p>
+            <h2 id="timeResult">Enter a value</h2>
+        </div>
+
+        <button id="timeClear" type="button">Clear</button>
+
+    </div>
+</section>
+
+
+<!-- DATA STORAGE CONVERTER -->
+<section class="converter-section" id="dataScreen" hidden>
+
+    <h2>💾 Data Storage Converter</h2>
+    <p>Convert digital storage units</p>
+
+    <div class="converter-card">
+
+        <label for="dataInput">Enter Data</label>
+        <input type="number" id="dataInput" placeholder="Enter value">
+
+        <label for="dataFrom">From</label>
+        <select id="dataFrom">
+            <option value="B">Byte (B)</option>
+            <option value="KB">Kilobyte (KB)</option>
+            <option value="MB">Megabyte (MB)</option>
+            <option value="GB">Gigabyte (GB)</option>
+            <option value="TB">Terabyte (TB)</option>
+        </select>
+
+        <button id="dataSwap" type="button">⇅ Swap</button>
+
+        <label for="dataTo">To</label>
+        <select id="dataTo">
+            <option value="KB">Kilobyte (KB)</option>
+            <option value="B">Byte (B)</option>
+            <option value="MB">Megabyte (MB)</option>
+            <option value="GB">Gigabyte (GB)</option>
+            <option value="TB">Terabyte (TB)</option>
+        </select>
+
+        <div class="converter-result">
+            <p>Converted Result</p>
+            <h2 id="dataResult">Enter a value</h2>
+        </div>
+
+        <button id="dataClear" type="button">Clear</button>
+
+    </div>
+</section>
+
+
+<!-- NUMBER SYSTEM CONVERTER -->
+<section class="converter-section" id="numberScreen" hidden>
+
+    <h2>🔢 Number System Converter</h2>
+    <p>Convert numbers between different bases</p>
+
+    <div class="converter-card">
+
+        <label for="numberInput">Enter Number</label>
+        <input
+            type="text"
+            id="numberInput"
+            placeholder="Enter a number"
+        >
+
+        <label for="numberFrom">From Number System</label>
+        <select id="numberFrom">
+            <option value="10">Decimal (Base 10)</option>
+            <option value="2">Binary (Base 2)</option>
+            <option value="8">Octal (Base 8)</option>
+            <option value="16">Hexadecimal (Base 16)</option>
+        </select>
+
+        <button id="numberSwap" type="button">⇅ Swap</button>
+
+        <label for="numberTo">To Number System</label>
+        <select id="numberTo">
+            <option value="2">Binary (Base 2)</option>
+            <option value="10">Decimal (Base 10)</option>
+            <option value="8">Octal (Base 8)</option>
+            <option value="16">Hexadecimal (Base 16)</option>
+        </select>
+
+        <div class="converter-result">
+            <p>Converted Result</p>
+            <h2 id="numberResult">Enter a value</h2>
+        </div>
+
+        <button id="numberClear" type="button">Clear</button>
+
+    </div>
+</section>
+    
+</div>
+
+</section>
+      
+        <footer>
+            <p>LEARN • CALCULATE • ACHIEVE</p>
+        </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/mathjs@14.8.1/lib/browser/math.js"></script>
+
+<script src="script.js"></script>
+
+</body>
+</html>
